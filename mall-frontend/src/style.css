@@ -1,0 +1,434 @@
+/* 全局样式 - 小米商城风格 */
+:root {
+  --mi-primary-color: #ff6700;
+  --mi-secondary-color: #ff6700;
+  --mi-text-primary: #333;
+  --mi-text-secondary: #666;
+  --mi-bg-color: #f5f5f5;
+  --mi-border-color: #e0e0e0;
+  --mi-white: #fff;
+  --mi-font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+  
+  /* 消息提示颜色 */
+  --mi-message-success: #67c23a;
+  --mi-message-warning: #e6a23c;
+  --mi-message-error: #f56c6c;
+  --mi-message-info: #909399;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--mi-font-family);
+  background-color: var(--mi-bg-color);
+  color: var(--mi-text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: var(--mi-text-primary);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  max-width: 1226px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: var(--mi-primary-color);
+  color: var(--mi-white);
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #ff5800;
+}
+
+.btn-large {
+  padding: 12px 30px;
+  font-size: 16px;
+}
+
+.mi-header {
+  background-color: var(--mi-white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.mi-footer {
+  background-color: #fafafa;
+  border-top: 1px solid var(--mi-border-color);
+  padding: 30px 0;
+  margin-top: 50px;
+}
+
+/* 面包屑导航 */
+.breadcrumb {
+  padding: 15px 0;
+  font-size: 12px;
+  color: var(--mi-text-secondary);
+}
+
+.breadcrumb a {
+  color: var(--mi-text-secondary);
+}
+
+.breadcrumb a:hover {
+  color: var(--mi-primary-color);
+}
+
+.breadcrumb .separator {
+  margin: 0 5px;
+  color: #ccc;
+}
+
+/* 卡片样式 */
+.mi-card {
+  background-color: var(--mi-white);
+  border: 1px solid var(--mi-border-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* 标题样式 */
+.mi-title {
+  font-size: 24px;
+  font-weight: normal;
+  padding: 20px;
+  border-bottom: 1px solid var(--mi-border-color);
+}
+
+/* 产品列表样式 */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.product-item {
+  background-color: var(--mi-white);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid transparent;
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-color: #e0e0e0;
+}
+
+.product-image {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.product-image img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.product-name {
+  font-size: 14px;
+  margin-bottom: 8px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.product-desc {
+  font-size: 12px;
+  color: #999;
+  height: 18px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.product-price {
+  color: var(--mi-primary-color);
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+/* 购物车样式 */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--mi-white);
+}
+
+.cart-table th,
+.cart-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--mi-border-color);
+}
+
+.cart-table th {
+  background-color: #fafafa;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.cart-item-image {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-item-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.cart-item-name {
+  text-align: left;
+}
+
+.cart-item-price,
+.cart-item-total {
+  color: var(--mi-primary-color);
+  font-weight: bold;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-control button {
+  width: 30px;
+  height: 30px;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+
+.quantity-control input {
+  width: 40px;
+  height: 30px;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.cart-summary {
+  background-color: var(--mi-white);
+  padding: 30px;
+  margin-top: 20px;
+  text-align: right;
+}
+
+.cart-total {
+  font-size: 24px;
+  color: var(--mi-primary-color);
+  margin-bottom: 20px;
+}
+
+/* 登录/注册页面样式 */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
+  padding: 40px 0;
+}
+
+.auth-card {
+  width: 400px;
+  background-color: var(--mi-white);
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+.auth-form .form-group {
+  margin-bottom: 20px;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  font-size: 14px;
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--mi-primary-color);
+  color: var(--mi-white);
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.auth-form button:hover {
+  background-color: #ff5800;
+}
+
+.auth-links {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.auth-links a {
+  color: var(--mi-primary-color);
+}
+
+/* 消息提示框样式 */
+.message-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.message {
+  min-width: 300px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  animation: slideInRight 0.3s ease-out;
+}
+
+.message.success {
+  background-color: #f0f9eb;
+  border-left: 4px solid var(--mi-message-success);
+  color: var(--mi-message-success);
+}
+
+.message.error {
+  background-color: #fef0f0;
+  border-left: 4px solid var(--mi-message-error);
+  color: var(--mi-message-error);
+}
+
+.message.warning {
+  background-color: #fdf6ec;
+  border-left: 4px solid var(--mi-message-warning);
+  color: var(--mi-message-warning);
+}
+
+.message.info {
+  background-color: #f4f4f5;
+  border-left: 4px solid var(--mi-message-info);
+  color: var(--mi-message-info);
+}
+
+.message-icon {
+  font-size: 18px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.message-content {
+  flex: 1;
+  font-size: 14px;
+}
+
+.message-close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 15px;
+  color: inherit;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.message.leave {
+  animation: slideOutRight 0.3s ease-out forwards;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .container {
+    padding: 0 10px;
+  }
+  
+  .message {
+    min-width: 250px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
