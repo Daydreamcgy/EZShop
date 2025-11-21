@@ -10,6 +10,17 @@
       
       <h2 class="mi-title">我的订单</h2>
       
+      <!-- 标题栏和操作区分离 -->
+      <div class="page-actions">
+        <button 
+          @click="exportOrders" 
+          class="export-btn mi-btn"
+          :disabled="exporting || loading"
+        >
+          {{ exporting ? '导出中...' : '导出订单' }}
+        </button>
+      </div>
+      
       <div v-if="loading" class="loading">
         <div class="skeleton-loader">
           <div class="skeleton-line"></div>
@@ -87,6 +98,7 @@ import Message from '../components/Message.vue'
 const orders = ref<Order[]>([])
 const loading = ref(true)
 const processingOrderId = ref<number | null>(null)
+const exporting = ref(false)
 
 // 消息提示相关
 const messageRef = ref<InstanceType<typeof Message> | null>(null)
@@ -169,10 +181,102 @@ const payOrder = async (orderId: number) => {
   }
 }
 
+// 导出订单为Excel文件
+const exportOrders = async () => {
+  try {
+    exporting.value = true
+    console.log('[OrderList] Exporting orders to Excel')
+    
+    // 调用导出API
+    const response = await fetch('http://localhost:8081/api/orders/export/excel', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    })
+    
+    if (!response.ok) {
+      throw new Error('导出失败: ' + response.statusText)
+    }
+    
+    // 处理响应
+    const blob = await response.blob()
+    const url = window.URL.createObjectURL(blob)
+    
+    // 创建下载链接并触发下载
+    const link = document.createElement('a')
+    link.href = url
+    
+    // 从响应头获取文件名，如果没有则使用默认名称
+    const contentDisposition = response.headers.get('content-disposition')
+    let filename = '订单记录.xlsx'
+    if (contentDisposition) {
+      const match = contentDisposition.match(/filename="([^"]+)"/)
+      if (match && match[1]) {
+        filename = match[1]
+      }
+    }
+    
+    link.download = filename
+    document.body.appendChild(link)
+    link.click()
+    
+    // 清理
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+    
+    showSideMessage('订单导出成功')
+    
+  } catch (error) {
+    console.error('[OrderList] Failed to export orders', error)
+    showSideMessage('导出失败: ' + (error as Error).message, 'error')
+  } finally {
+    exporting.value = false
+  }
+}
+
 fetchOrders()
 </script>
 
 <style scoped>
+.page-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin: 15px 0 20px;
+}
+
+.export-btn.mi-btn {
+    background-color: #ff9500; /* 小米风格橙色 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 2px; /* 小米风格小圆角 */
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.export-btn.mi-btn:hover:not(:disabled) {
+    background-color: #ffad33;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(255, 149, 0, 0.3);
+}
+
+.export-btn.mi-btn:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.export-btn.mi-btn:disabled {
+    background-color: #d9d9d9;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 .order-list-container {
   background-color: var(--mi-bg-color);
   padding: 20px 0;
