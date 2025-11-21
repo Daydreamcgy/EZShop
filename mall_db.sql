@@ -1,6 +1,16 @@
 -- 创建数据库
-CREATE DATABASE IF NOT EXISTS mall_db;
+CREATE DATABASE IF NOT EXISTS mall_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE mall_db;
+
+-- 设置字符集
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+SET character_set_connection=utf8mb4;
+
+-- 删除已存在的表（按照依赖关系顺序）
+DROP TABLE IF EXISTS cart_items;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS users;
 
 -- 创建用户表
 CREATE TABLE users (
