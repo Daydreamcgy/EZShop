@@ -31,6 +31,7 @@ com\example\mall\service\impl\ProductServiceImpl.class
 com\example\mall\service\CartService.class
 com\example\mall\controller\UserController.class
 com\example\mall\payload\JwtResponse.class
+com\example\mall\service\impl\OrderServiceImpl$1.class
 com\example\mall\payload\RegisterRequest.class
 com\example\mall\security\WebSecurityConfig.class
 com\example\mall\MallBackendApplication.class
