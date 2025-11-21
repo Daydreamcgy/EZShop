@@ -1,9 +1,10 @@
 <template>
   <div class="message-container">
     <transition name="slide">
+      <!-- 使用script中定义的响应式数据 -->
       <div v-if="visible" class="message-panel" :class="type">
         <div class="message-content">
-          <div class="message-icon" v-if="type === 'success'">✓</div>
+          <div class="message-icon" v-if="type === 'success'">&#x2713;</div>
           <div class="message-text">{{ message }}</div>
         </div>
       </div>
@@ -12,14 +13,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 
-const props = defineProps<{
-  message: string
-  type: 'success' | 'error' | 'warning' | 'info'
+const props = withDefaults(defineProps<{
+  message?: string
+  type?: 'success' | 'error' | 'warning' | 'info'
   duration?: number
-}>()
+}>(), {
+  message: '',
+  type: 'info',
+  duration: 3000
+})
 
+// 使用响应式数据而不是props，因为props是只读的
+const message = ref(props.message)
+const type = ref(props.type)
 const visible = ref(false)
 
 const show = () => {
@@ -32,15 +40,22 @@ const show = () => {
   }, duration)
 }
 
-// 监听消息变化，自动显示
-watch(() => props.message, () => {
-  if (props.message) {
-    show()
-  }
-}, { immediate: true })
+const success = (msg: string, duration?: number) => {
+  message.value = msg
+  type.value = 'success'
+  show()
+}
+
+const error = (msg: string, duration?: number) => {
+  message.value = msg
+  type.value = 'error'
+  show()
+}
 
 defineExpose({
-  show
+  show,
+  success,
+  error
 })
 </script>
 
